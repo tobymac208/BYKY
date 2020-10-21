@@ -3,17 +3,20 @@
 import sys
 from PySide2.QtWidgets import *
 
-class Form(QMainWindow):
+class MainWindow(QMainWindow):
     def __init__(self, parent=None):
-        super(Form, self).__init__(parent)
+        super(MainWindow, self).__init__(parent)
         self.setWindowTitle("Before You Kill Yourself")
 
         layout = QGridLayout()
 
+        # prompt the user to see how they're doing
         feeling_prompt_label = QLabel("How awful do you feel right now?")
-        feeling_prompt_input = QLineEdit()
+        feeling_prompt_box = QComboBox()
+        feelings = ["Suicidal", "What's the point?", "Life is boring.", "No one understands.", "This app isn't helpful."]
+        feeling_prompt_box.addItems(feelings)
         layout.addWidget(feeling_prompt_label, 0, 0)
-        layout.addWidget(feeling_prompt_input, 0, 1)
+        layout.addWidget(feeling_prompt_box, 0, 1)
 
         # add objects for our layouts
         # first row
@@ -36,7 +39,7 @@ class Form(QMainWindow):
         item_checkbox_5 = QCheckBox()
         layout.addWidget(item_label_5, 4, 0)
         layout.addWidget(item_checkbox_5, 4, 1)
-        # fouth row
+        # fourth row
         item_label_4 = QLabel(text="Do a little warmup exercise.")
         item_checkbox_4 = QCheckBox()
         layout.addWidget(item_label_4, 5, 0)
@@ -48,10 +51,12 @@ class Form(QMainWindow):
 
         self.setCentralWidget(widget)
 
-app = QApplication(sys.argv)
+# main method
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
 
-form1 = Form()
-form1.show()
+    form1 = MainWindow()
+    form1.show()
 
-# run the application
-sys.exit(app.exec_())
+    # run the application
+    sys.exit(app.exec_())
